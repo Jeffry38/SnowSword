@@ -1,0 +1,22 @@
+version: '3.6'
+
+services:
+    snowsword:
+        build:
+            context: ../
+            dockerfile: ./Docker/Dockerfile
+        container_name: SnowSword
+        depends_on:
+            - snowsword_db
+        ports: 
+            - 8081:8081
+        entrypoint: ["/root/wait-for-it.sh","SnowSwordDB:3306","--","java","-jar","/root/BackEnd/snowsword/target/snowsword-0.0.1-SNAPSHOT.jar"]
+
+    snowsword_db:
+        image: mysql:8.0.28
+        container_name: SnowSwordDB
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=snowsword
+
+
