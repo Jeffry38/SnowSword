@@ -60,10 +60,4 @@ public class UrlParser {
     public String getAddress() {
         return this.address;
     }
-
-    public static void main(String[] args) {
-        UrlParser urlParser = new UrlParser("http://www.baidu.com/1.php");
-        String a = urlParser.getAddress();
-        System.out.println(a);
-    }
 }
