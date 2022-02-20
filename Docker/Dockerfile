@@ -18,7 +18,7 @@ RUN curl 'https://cdn.npmmirror.com/binaries/node/v16.5.0/node-v16.5.0-linux-x64
     /root/node-v16.5.0-linux-x64/bin/npm run build:prod && \
     mv dist/* /root/BackEnd/snowsword/src/main/resources/static 
 
-RUN curl 'https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz' -o apache-maven-3.8.4-bin.tar.gz && \
+RUN curl 'https://archive.apache.org/dist/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz' -o apache-maven-3.8.4-bin.tar.gz && \
     tar xvf apache-maven-3.8.4-bin.tar.gz && \
     mv settings.xml ./apache-maven-3.8.4/conf/ && \
     mv application.properties ./BackEnd/snowsword/src/main/resources/ && \

@@ -1,5 +1,5 @@
 # SnowSword
-Web版菜刀（Webshell管理工具）
+Web版中国菜刀（Webshell管理工具）
 
 
 # 免责声明

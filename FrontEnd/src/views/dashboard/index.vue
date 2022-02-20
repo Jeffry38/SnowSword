@@ -171,6 +171,7 @@
 
 <script>
   import request from '@/utils/request'
+  import { Loading } from 'element-ui';
 
   export default {
     data() {
@@ -237,11 +238,6 @@
     },
 
     methods: {
-      test(){
-        console.log(this.contextMenu.webshell.currentId);
-        console.log(this.contextMenu.category.currentId);
-      },
-
       categoryRightClick(row, column, event) {
         event.preventDefault();
         this.closeMenu();
@@ -459,6 +455,7 @@
 
       addWebshell(isSubmit){
         if(isSubmit){
+          let loadingInstance = Loading.service();
 
           request({
             url: '/webshell/add',
@@ -491,8 +488,11 @@
                 this.webshellForm.visible = false;
                 this.refreshData();
 
+                loadingInstance.close();
               }).catch(error => {
                 console.log(error);
+
+                loadingInstance.close();
               })
 
             }else{
@@ -503,12 +503,13 @@
 
               this.webshellForm.visible = false;
               this.refreshData();
+              loadingInstance.close();
             }
 
           }).catch(error => {
+            loadingInstance.close();
             console.log(error);
           })
-
         }else{
           this.webshellForm.title = "添加数据";
           this.webshellForm.isUpdate = false;
@@ -670,7 +671,6 @@
             password:this.webshellForm.password,
           } 
         }).then(response => {
-
           if(response.data){
             this.$message({
               type: 'success',
@@ -686,7 +686,6 @@
         }).catch(error => {
           console.log(error);
         })
-
       },
 
       openOverview() {
