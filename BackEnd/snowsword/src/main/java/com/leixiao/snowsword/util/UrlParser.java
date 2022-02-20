@@ -36,12 +36,12 @@ public class UrlParser {
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url("https://www.ip138.com/iplookup.asp?ip="+ip+"&action=2")
+                    .url("https://www.ip.cn/ip/"+ip+".html")
                     .header("User-Agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36")
                     .build();
             Response response = client.newCall(request).execute();
-            String responseBody = new String(response.body().bytes(), "GB2312");
-            Matcher matcher = Pattern.compile("\\{\"ASN归属地\":\"(.*?)\",").matcher(responseBody);
+            String responseBody = new String(response.body().bytes(), "utf-8");
+            Matcher matcher = Pattern.compile("<div id=\"tab0_address\">(.*?)</div>").matcher(responseBody);
             if(matcher.find()){
                 address = matcher.group(1).trim();
             }else{
@@ -59,5 +59,11 @@ public class UrlParser {
 
     public String getAddress() {
         return this.address;
+    }
+
+    public static void main(String[] args) {
+        UrlParser urlParser = new UrlParser("http://www.baidu.com/1.php");
+        String a = urlParser.getAddress();
+        System.out.println(a);
     }
 }
