@@ -6,6 +6,7 @@ import okhttp3.Response;
 
 import java.net.InetAddress;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,10 +33,15 @@ public class UrlParser {
     }
 
     private String IP2Address(String ip){   //通过ip地址获取物理地址，具体方法是通过请求www.ip138.com网站，从返回包里提取数据
+        System.out.println(111);
         String address;
         try {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .connectTimeout(2, TimeUnit.SECONDS)
+                    .readTimeout(3,TimeUnit.SECONDS)
+                    .build();
+            Request request = new Request
+                    .Builder()
                     .url("https://www.ip.cn/ip/"+ip+".html")
                     .header("User-Agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36")
                     .build();
@@ -50,6 +56,7 @@ public class UrlParser {
         }catch (Exception exception){
             address =  exception.toString();
         }
+        System.out.println(222);
         return address;
     }
 

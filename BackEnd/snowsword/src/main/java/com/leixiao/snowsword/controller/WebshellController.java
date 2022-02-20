@@ -138,7 +138,6 @@ public class WebshellController {
             webshell.setPassword(password);
             webshell.setNote(note);
             webshell.setUpdate_time(new Date(System.currentTimeMillis()));
-
             UrlParser urlParser = new UrlParser(url);
             if (!urlParser.getIp().equals(oldIP)) {
                 Info info = webshell.getInfo();
