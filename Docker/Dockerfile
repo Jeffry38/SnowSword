@@ -10,7 +10,7 @@ COPY ./Docker/settings.xml ./
 COPY ./Docker/application.properties ./
 COPY ./Docker/wait-for-it.sh ./
 
-RUN curl 'https://registry.npmmirror.com/-/binary/node/v16.5.0/node-v16.5.0-linux-x64.tar.gz' -o node-v16.5.0-linux-x64.tar.gz && \
+RUN curl 'https://cdn.npmmirror.com/binaries/node/v16.5.0/node-v16.5.0-linux-x64.tar.gz' -o node-v16.5.0-linux-x64.tar.gz && \
     tar xvf node-v16.5.0-linux-x64.tar.gz && \
     ln -s /root/node-v16.5.0-linux-x64/bin/node /bin/node && \
     cd /root/FrontEnd && \
