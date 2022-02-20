@@ -522,6 +522,7 @@
 
       updateWebshell(isSubmit){
         if(isSubmit){
+          let loadingInstance = Loading.service();
 
           request({
             url: '/webshell/update',
@@ -533,7 +534,7 @@
               note:this.webshellForm.note
             } 
           }).then(response => {
-            
+            loadingInstance.close();
             this.$message({
               type: 'success',
               message: '更新成功'
@@ -543,6 +544,7 @@
             this.refreshData();
 
           }).catch(error => {
+            loadingInstance.close();
             console.log(error);
           })
 

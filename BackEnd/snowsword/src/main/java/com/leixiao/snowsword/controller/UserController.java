@@ -17,7 +17,8 @@ import java.util.Date;
 public class UserController {
     @Autowired
     private UserRepository userRepository; // 框架自动注入userRepository对象，用来操作数据库user表
-    private JwtToken jwtToken = new JwtToken();
+    @Autowired
+    private JwtToken jwtToken;
 
     @PostMapping("/login")
     public JSONObject login(@RequestBody JSONObject jsonParam) {
@@ -37,7 +38,7 @@ public class UserController {
             resultObject.put("code", 60204);
             resultObject.put("message", "username or password are incorrect.");
         } else {
-            String token = jwtToken.createToken(username);
+            String token = jwtToken.createToken(user);
             JSONObject dataObject = new JSONObject();
             dataObject.put("token", token);
             resultObject.put("code", 20000);
