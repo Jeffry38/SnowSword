@@ -1,8 +1,11 @@
 package com.leixiao.snowsword.util;
 
+import org.apache.commons.io.FileUtils;
 import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
+
+import java.io.File;
 import java.net.InetAddress;
 import java.net.URL;
 
@@ -31,9 +34,14 @@ public class UrlParser {
     private String IP2Address(String ip){   //通过ip地址获取物理地址
         String address;
         try {
+            String tmpDir = System.getProperties().getProperty("java.io.tmpdir");
+            String dbPath = tmpDir + File.separator + "ip2region.db";
+            File file = new File(dbPath);
+            if (file.exists() == false) {
+                FileUtils.copyInputStreamToFile(this.getClass().getResourceAsStream("/ip2region.db"), file);
+            }
             DbConfig config = new DbConfig();
-            String dbfile = this.getClass().getResource("/ip2region.db").getPath();
-            DbSearcher searcher = new DbSearcher(config, dbfile);
+            DbSearcher searcher = new DbSearcher(config, dbPath);
             DataBlock block = searcher.btreeSearch(ip);
             address = block.getRegion();
         }catch (Exception exception){
